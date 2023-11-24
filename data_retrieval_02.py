@@ -2,11 +2,10 @@ import pandas as pd
 
 
 def get_statistics(titanic):
-    print(titanic.info())
     passengers = titanic['PassengerId'].nunique()
     youngest = titanic['Age'].min()
     most_expensive = titanic['Fare'].max()
-    range_ticket = titanic['Fare'].median()
+    range_ticket = titanic['Fare'].max()
     no_cabins = titanic['Cabin'].count()
     embarked = titanic['Embarked'].mode()
     gender = titanic['Sex'].mode()
