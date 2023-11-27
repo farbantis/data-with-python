@@ -3,7 +3,8 @@ import pandas as pd
 
 def migration(excel_file):
     country = pd.read_excel(excel_file, sheet_name='Country Migration')
-    country = len(country['target_country_code'].unique())  # returns np array
+    # country = len(country['target_country_code'].unique())  # returns np array
+    country = country['target_country_code'].nunique()  # returns np array
     print(country)
     return country
 

@@ -6,7 +6,7 @@ def get_grouped(titanic):
     mean_ticket_price_sex = titanic.groupby(['Pclass', 'Sex'])['Fare'].mean()
     mean_ticket_price_port = titanic.groupby(['Embarked'])['Fare'].mean()
     survivors = titanic.groupby(['Pclass'])['Survived'].sum()
-    survivors_1 = titanic[titanic['Survived']==1].groupby('Pclass')['Survived'].value_counts()
+    survivors_1 = titanic[titanic['Survived'] == 1].groupby('Pclass')['Survived'].value_counts()
     return sex_age, mean_ticket_price_sex, mean_ticket_price_port, survivors, survivors_1
 
 
