@@ -17,7 +17,10 @@ conn = psycopg2.connect(
 
 cursor = conn.cursor()
 sql_query = "SELECT * FROM your_table_name WHERE country_name = 'Afghanistan' and wb_income='Low income'"
+
+
 cursor.execute(sql_query)
+conn.commit()
 result = cursor.fetchall()
 cursor.close()
 conn.close()
