@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def movies_project(data):
     df = pd.read_csv(data)
-    #print(df.info())
+    print(df.info())
     blanks = df.isna().any()
     # movies of each genre in descending order
     movies_of_each_genre = df.groupby(['genre'])['genre'].count().sort_values(ascending=False)
@@ -20,7 +20,11 @@ def movies_project(data):
     grouped_genres = df.groupby(['genre'])['rank'].mean()
     labels_bar = grouped_genres.keys()
     fig, ax = plt.subplots()
+    ax.set_xticklabels(labels_bar, rotation=90, ha='center')
     plt.bar(labels_bar, grouped_genres)
+    ax.set_xlabel('Genre')
+    ax.set_ylabel('Mean Rank')
+    ax.set_title('Mean Rank by Genre')
     plt.show()
 
     return blanks, movies_of_each_genre, director_rank_2, rank_over_9
