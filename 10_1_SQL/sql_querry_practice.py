@@ -56,12 +56,19 @@ figures = pie_df['salary_per_year']
 fig, ax = plt.subplots()
 colors = ['red', 'green', 'yellow']
 hatch=['**O', 'oO', 'O.O', '.||.']
+explode = [0.1, 0.1, 0.1]
+textprops={'size': 'smaller'}
 ax.pie(figures,
        labels=labels,
        autopct='%1.1f%%',
        colors=colors,
-       pctdistance=1.25,
-       labeldistance=.6)
+       pctdistance=0.6,
+       labeldistance=1.1,
+       shadow=True,
+       startangle=90,
+       explode=explode,
+       radius=1.3,
+       textprops=textprops)
 plt.show()
 
 # table = PrettyTable()
