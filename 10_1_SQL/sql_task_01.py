@@ -2,12 +2,12 @@ import pandas as pd
 import psycopg2
 import mysql.connector
 from sqlalchemy import create_engine
+from password import db_password
 
 
 skill_migration = pd.read_excel('https://github.com/futureCodersSE/working-with-data/blob/main/Data%20sets/public_use-talent-migration.xlsx?raw=true', "Skill Migration")
 
 db_user = 'girosman'
-db_password = 'ghjdjlf'
 db_host = '191.96.53.71'
 db_port = '5432'
 db_name = 'postgres'

@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 from decimal import Decimal
 from prettytable import PrettyTable
 from sqlalchemy import create_engine
+from password import db_password
 
 db_user = 'girosman'
-db_password = 'ghjdjlf'
 db_host = '191.96.53.71'
 db_port = '5432'
 db_name = 'postgres'

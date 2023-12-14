@@ -1,8 +1,8 @@
 import pandas as pd
 import psycopg2
+from password import db_password
 
 db_user = 'girosman'
-db_password = 'ghjdjlf'
 db_host = '191.96.53.71'
 db_port = '5432'
 db_name = 'postgres'
