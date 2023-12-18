@@ -33,7 +33,7 @@ def challenge_2(df):
 
 def challenge_3(df):
     print('challenge 3')
-    # task 1
+    # task x`   1
     uk_vaccinations = df[df['country'] == 'United Kingdom']
     min_total_vaccinations = uk_vaccinations['total_vaccinations'].min()
     print(f'min UK vaccination: {min_total_vaccinations}')
@@ -48,10 +48,25 @@ def challenge_3(df):
     print(df['total_vaccinations_1'])
 
 
-    # task 4
-
 def challenge_4(df):
     print('challenge 4')
+    # 2
+    total_per_manufacturer = df.groupby(['vaccine'])['total_vaccinations'].sum().apply(lambda x: '{:,.0f}'.format(x))
+    print(f'total vaccinations per manufacturer is: {total_per_manufacturer}')
+    # 3
+    df['percent_of_total'] = df['total_vaccinations'] / (df['total_vaccinations'].sum()) * 100
+    print(df.head())
+    print(df.tail())
+    # 4
+    median_percentage = df['percent_of_total'].median()
+    print(f'median percentage is {median_percentage}')
+    # 5
+    df['normalized_percentage'] = df['percent_of_total']
+    print(df.tail())
+    # 6
+    df['normalized_percentage'] = [1 if value >= median_percentage else 0 for value in df['normalized_percentage']]
+    print(df.head())
+    print(df.tail())
 
 
 link = "https://github.com/lilaceri/Working-with-data-/blob/342abab10d93c4bf23b5c55a50f189f12a137c5f/Data%20Sets%20for%20code%20divisio/Covid%20Vaccination%20Data.xlsx?raw=true"
@@ -60,4 +75,6 @@ df = pd.read_excel(link, sheet_name='by_country')
 challenge_1(df)
 challenge_2(df)
 challenge_3(df)
-challenge_4(df)
+
+df_4 = pd.read_excel(link, sheet_name='by_manufacturer')
+challenge_4(df_4)
