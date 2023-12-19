@@ -1,5 +1,9 @@
 import pandas as pd
 from scipy.stats import linregress
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+
 
 def describing_data_1_2(link):
     # 1 - is age closely related to income?
@@ -38,8 +42,28 @@ def describing_data_3(link):
     print(f'the good correlation is for: {result}')
 
 
+def ex_4(df):
+    print(df.info())
+    net_migration = [column for column in df.columns if 'net_per_' in column]
+    df_net_migration = df[net_migration]
+    means = df_net_migration.mean()
+    labels = net_migration
+    plt.plot(labels, means)
+    plt.title('Mean Net Migration Years 2015-2019')
+    plt.xlabel('Year')
+    plt.ylabel('Mean Net Migration per 10K')
+    plt.xticks(rotation=45)
+    plt.grid()
+    plt.show()
+
+
+
 url = 'https://github.com/futureCodersSE/working-with-data/blob/main/Data%20sets/Income-Data.xlsx?raw=true'
 describing_data_1_2(url)
 
 url3 = "https://github.com/lilaceri/Working-with-data-/blob/b157a2feceb7709cf82426932385706d65446270/Data%20Sets%20for%20code%20divisio/Positive_Psychology_2017.csv?raw=true"
 describing_data_3(url3)
+
+url4 = 'https://github.com/futureCodersSE/working-with-data/blob/main/Data%20sets/public_use-talent-migration.xlsx?raw=true'
+df = pd.read_excel(url4, sheet_name='Country Migration')
+ex_4(df)
