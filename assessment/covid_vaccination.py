@@ -107,6 +107,6 @@ link = "https://github.com/lilaceri/Working-with-data-/blob/342abab10d93c4bf23b5
 
 
 challenge_1(link)
-#challenge_2(link)
-#challenge_3(link)
-#challenge_4(link)
+challenge_2(link)
+challenge_3(link)
+challenge_4(link)

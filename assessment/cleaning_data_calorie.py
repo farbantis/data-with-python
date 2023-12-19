@@ -3,15 +3,21 @@ import pandas as pd
 
 
 def calorie(url):
-    # column "Date" has consequtive dates, so we should add date in row 22 which is 2020/12/22, same row 26
-    # column "Data" also should be adjucted to date type
-    # column "Calories" contains empty sell, which we can either delete (preferably) or fill out with average calorie
+    """
+    We also see, that colum Date in not Datetime object, moreover it misses 2 values. As the dates are
+    consecutive, we can add missing value, without deleting rows. As dates are strings here, we can
+    change their format to Datetime.
+    Guess rows with missing values in calories column should be deleted, as the value is not knows,
+    still maybe there is correlation between Pulse, Maxpulse and Calories
+    """
     df = pd.read_csv(url)
     print(df.info())
+    print(df)
     df.loc[22, 'Date'] = datetime.date(2020, 12, 22)
     df.loc[26, 'Date'] = datetime.date(2020, 12, 26)
-    df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    df['Date'] = pd.to_datetime(df['Date'])
     df.dropna(subset=["Calories"], inplace=True)
+    print(df.info())
     return df
 
 
