@@ -53,7 +53,7 @@ def sea_project_4(df_noaa_cleaned):
     """
     task 4 plot line of best fit for CSIRO
     scipy.stats.linregress(x, y=None, alternative='two-sided')
-    the equasion of the linear trend is y=ax+b
+    the equation of the linear trend is y=ax+b
     where x is period (here years_min_to_2050), a is slope (ratio of slope), b (free trend value)
     """
     print('task 4')
