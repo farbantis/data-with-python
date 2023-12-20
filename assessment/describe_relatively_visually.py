@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from scipy.stats import linregress
 import matplotlib
@@ -55,7 +56,17 @@ def ex_4(df):
     plt.xticks(rotation=45)
     plt.grid()
     plt.show()
+    return df_net_migration
 
+
+def ex_5(df_net_migration):
+    total_per_column = df_net_migration.sum()
+    labels = np.arange(2015, 2020, 1)
+    plt.bar(labels, total_per_column, color='yellow')
+    plt.xlabel('Year')
+    plt.ylabel('Total Net Migration')
+    plt.grid()
+    plt.show()
 
 
 url = 'https://github.com/futureCodersSE/working-with-data/blob/main/Data%20sets/Income-Data.xlsx?raw=true'
@@ -66,4 +77,6 @@ describing_data_3(url3)
 
 url4 = 'https://github.com/futureCodersSE/working-with-data/blob/main/Data%20sets/public_use-talent-migration.xlsx?raw=true'
 df = pd.read_excel(url4, sheet_name='Country Migration')
-ex_4(df)
+df_net_migrations = ex_4(df)
+ex_5(df_net_migrations)
+
