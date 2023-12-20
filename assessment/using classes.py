@@ -21,52 +21,42 @@ class Trend:
 
     @staticmethod
     def get_data_for_linear_trend(x, y):
-        """as this is called several times it is better to make it as a separate function"""
         slope, intercept, r_value, p_value, std_err = linregress(x, y)
         return slope, intercept, r_value, p_value, std_err
 
-    def diagram(self):
+    @staticmethod
+    def get_forecast(slope, years, intercept):
+        return slope * years + intercept
+
+    def diagram(self, title='', title_x='', title_y='', grid=False):
         slope, intercept, r_value, p_value, std_err = self.get_data_for_linear_trend(self.x, self.y)
         years = self.get_array_of_years(self.start, self.finish, self.rate)
-        forecast = slope * years + intercept
-        plt.scatter(self.x, self.y, label='Data')
-        plt.plot(years, forecast, color='red', label='Linear Trend')
-        plt.title('Linear Trend of CSIRO Adjusted Sea Level')
-        plt.xlabel('Year')
-        plt.ylabel('CSIRO Adjusted Sea Level')
-        plt.legend()
-        plt.show()
+        forecast = self.get_forecast(slope, years, intercept)
+        diagram = plt.scatter(self.x, self.y)
+        plt.plot(years, forecast, color='red')
+        plt.title(title)
+        plt.xlabel(title_x)
+        plt.ylabel(title_y)
+        if grid:
+            plt.grid()
+        plt.legend([])
+        # plt.show()
+        return diagram
 
 
 link = 'https://raw.githubusercontent.com/freeCodeCamp/boilerplate-sea-level-predictor/master/epa-sea-level.csv'
 df = pd.read_csv(link)
 df_noaa_cleaned = df.dropna(subset=['NOAA Adjusted Sea Level'])
 
-y_axis = df_noaa_cleaned['Year']
-x_asix = df_noaa_cleaned['CSIRO Adjusted Sea Level']
+x_asix = df_noaa_cleaned['Year']
+y_axis = df_noaa_cleaned['CSIRO Adjusted Sea Level']
+
 year_start = df_noaa_cleaned['Year'].min()
 year_finish = 2051
 year_rate = 1
+
+# initiate class
 task_3 = Trend(year_start, year_finish, year_rate, x_asix, y_axis)
-task_3.diagram()
-
-
-
-# def sea_project_4(df_noaa_cleaned):
-#     """
-#     task 4 plot line of best fit for CSIRO
-#     scipy.stats.linregress(x, y=None, alternative='two-sided')
-#     the equation of the linear trend is y=ax+b
-#     where x is period (here years_min_to_2050), a is slope (ratio of slope), b (free trend value)
-#     """
-#     print('task 4')
-#     #slope, intercept = get_data_for_linear_trend(df_noaa_cleaned['Year'], df_noaa_cleaned['CSIRO Adjusted Sea Level'])
-#     #years = get_array_of_years(df_noaa_cleaned['Year'].min(), 2051, 1)
-#     #forecast = slope * years + intercept
-#     plt.scatter(df_noaa_cleaned['Year'], df_noaa_cleaned['CSIRO Adjusted Sea Level'], label='Data')
-#     plt.plot(years, forecast, color='red', label='Linear Trend')
-#     plt.title('Linear Trend of CSIRO Adjusted Sea Level')
-#     plt.xlabel('Year')
-#     plt.ylabel('CSIRO Adjusted Sea Level')
-#     plt.legend()
-#     plt.show()
+title, title_x, title_y = 'Linear Trend of CSIRO Adjusted Sea Level', 'Year', 'CSIRO Adjusted Sea Level'
+result = task_3.diagram(title, title_x, title_y, True)
+plt.show()
