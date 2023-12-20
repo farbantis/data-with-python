@@ -14,18 +14,20 @@ class Trend:
         self.x = x
         self.y = y
 
-    def get_array_of_years(self):
+    @staticmethod
+    def get_array_of_years(start, finish, rate):
         """returns array of years based on start, finish, rate"""
-        return np.arange(self.start, self.finish, self.rate)
+        return np.arange(start, finish, rate)
 
-    def get_data_for_linear_trend(self):
+    @staticmethod
+    def get_data_for_linear_trend(x, y):
         """as this is called several times it is better to make it as a separate function"""
-        slope, intercept, r_value, p_value, std_err = linregress(self.x, self.y)
-        return slope, intercept
+        slope, intercept, r_value, p_value, std_err = linregress(x, y)
+        return slope, intercept, r_value, p_value, std_err
 
     def diagram(self):
-        slope, intercept = self.get_data_for_linear_trend()
-        years = self.get_array_of_years()
+        slope, intercept, r_value, p_value, std_err = self.get_data_for_linear_trend(self.x, self.y)
+        years = self.get_array_of_years(self.start, self.finish, self.rate)
         forecast = slope * years + intercept
         plt.scatter(self.x, self.y, label='Data')
         plt.plot(years, forecast, color='red', label='Linear Trend')
