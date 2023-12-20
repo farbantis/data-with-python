@@ -24,7 +24,11 @@ def describing_data_1_2(link):
 
 
 def describing_data_3(link):
-    """firstlanguage contains empty rows"""
+    """
+    firstlanguage contains empty rows
+    our task is to look through all columns which contains numbers and find correlation of these
+    columns with 'Wellbeing'
+    """
     # 3. Does Stress predict Wellbeing?
     df = pd.read_csv(link)
     print(df.info())
@@ -49,11 +53,12 @@ def ex_4(df):
     df_net_migration = df[net_migration]
     means = df_net_migration.mean()
     labels = net_migration
+    plt.figure(figsize=(11, 5))
     plt.plot(labels, means)
     plt.title('Mean Net Migration Years 2015-2019')
     plt.xlabel('Year')
     plt.ylabel('Mean Net Migration per 10K')
-    plt.xticks(rotation=45)
+    # plt.xticks(rotation=45)
     plt.grid()
     plt.show()
     return df_net_migration
@@ -63,8 +68,11 @@ def ex_5(df_net_migration):
     total_per_column = df_net_migration.sum()
     labels = np.arange(2015, 2020, 1)
     plt.bar(labels, total_per_column, color='yellow')
+    for index, value in enumerate(total_per_column):
+        plt.text(labels[index], value, str(int(value)), ha='center', va='center', color='black')
     plt.xlabel('Year')
     plt.ylabel('Total Net Migration')
+    plt.title('Bar chart for yearly migration 2015-2019')
     plt.grid()
     plt.show()
 

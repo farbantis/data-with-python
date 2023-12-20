@@ -44,6 +44,7 @@ def sea_project_3(df):
     df_noaa_cleaned = df.dropna(subset=['NOAA Adjusted Sea Level'])
     print(df_noaa_cleaned)
     diagram = df_noaa_cleaned.plot.scatter(x='Year', y='NOAA Adjusted Sea Level', title='Task 3.NOAA by timespan', figsize=(11, 5))
+    # for years to be integers
     diagram.xaxis.set_major_locator(plt.MultipleLocator(base=1))
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.show()
