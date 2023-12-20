@@ -69,7 +69,8 @@ def ex_5(df_net_migration):
     labels = np.arange(2015, 2020, 1)
     plt.bar(labels, total_per_column, color='yellow')
     for index, value in enumerate(total_per_column):
-        plt.text(labels[index], value, str(int(value)), ha='center', va='center', color='black')
+        plt.text(labels[index], value, str(int(value)), color='black')
+    plt.plot(labels, total_per_column, linestyle='dotted', color='red')
     plt.xlabel('Year')
     plt.ylabel('Total Net Migration')
     plt.title('Bar chart for yearly migration 2015-2019')
